@@ -2,10 +2,10 @@ export const SITE = {
   title: "Field Brief — Filip Balenko — F2 AI Deployment Strategist",
   subtitle: "A Mid-Market Private Credit Fund's First 90 Days on F2",
   author: "Filip Balenko",
-  email: "filip@example.com",
+  email: "filippbalenko@gmail.com",
   links: {
-    linkedin: "https://www.linkedin.com/",
-    github: "https://github.com/",
+    linkedin: "https://www.linkedin.com/in/filipbalenko/",
+    github: "https://github.com/fbalenko/f2-deploy",
     sfvic: "https://sfv-ic.com",
   },
   version: "v1.0",
