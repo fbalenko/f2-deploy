@@ -1,0 +1,21 @@
+# Prompt Library
+
+### How to read this section
+
+This is the technical core of the field brief. Each prompt below is a production-grade template I'd configure for Meridian in the first 60 days, organized into the three deployment tiers from Section 2 so that the launch sequence stays intelligible.
+
+The honest framing: I haven't seen F2's actual prompt syntax or how it parses retrieval against the deal library. These prompts are **structured asks** — they demonstrate what an experienced underwriter knows to specify, what guardrails they put on the output, and what audit hooks they leave for the reviewer. Plug them into F2's actual prompt interface and they'll need syntactic adaptation. The underwriting logic doesn't change.
+
+### Prompt design principles
+
+Five principles hold across every prompt below. Each prompt is engineered to satisfy all five:
+
+1. **Source-link by default.** Every quantitative claim must trace to a cell, doc page, or data-room file. Audit Mode is on, always.
+2. **Force structure on the output.** Free-form responses are unaudited responses. Tables, schemas, and explicit field names produce outputs that an Associate can validate in 90 seconds instead of 9 minutes.
+3. **Define the failure mode in the prompt.** "Flag any X without Y" is a better instruction than "evaluate X." Telling the model what *failure* looks like is more reliable than telling it what success looks like, especially on judgment-heavy tasks.
+4. **Bound the universe.** "Last 5 years," "deals >$25M EBITDA," "sectors in \{SaaS, healthcare services, light industrial\}." Unbounded retrieval is how F2 pulls the wrong comp set and an Associate spends 20 minutes figuring out why the leverage stat looks weird.
+5. **Match firm voice explicitly.** Memo drafts, monitoring commentary, and DDQ responses each have a tone Meridian uses and a tone Meridian doesn't. The prompt names the template version.
+
+---
+
+<PromptLibrary />

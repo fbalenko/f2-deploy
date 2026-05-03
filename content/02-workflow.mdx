@@ -1,0 +1,164 @@
+# Workflow Decomposition
+
+### How to read this section
+
+Workflow decomposition is the deployment strategist's first analytical job. You take a customer's stated workflow, break it into discrete tasks, and identify (a) which tasks the AI platform can plausibly handle, (b) what the realistic time savings look like under conservative assumptions, and (c) which subset to launch with on day one to maximize the probability of an internal champion emerging by day 30.
+
+The trap to avoid: treating every F2-eligible task as equally good day-one material. F2 can plausibly touch every stage of Meridian's underwriting workflow. But launching on all of them simultaneously is how deployments fail — too many surface areas to debug, too many opportunities for a bad output to land in front of a skeptical Principal, too thin a layer of internal advocacy when the inevitable first failure occurs.
+
+The rest of this section maps F2's capabilities to Meridian's tasks, shows the time-savings math transparently, and argues a specific three-workflow launch sequence for days 1–30.
+
+### F2 capability → Meridian task → time savings
+
+The mapping below pairs each of F2's stated capabilities with the specific Meridian task it touches, the conservative baseline hours it costs Meridian today, and the realistic time savings under F2.
+
+**Conservative baseline assumption:** F2 publicly states up to 45 hours/week saved per analyst and 60–75% faster diligence. Both numbers represent the upper bound of customer outcomes. For deployment planning, I'm anchoring on the lower end of the speedup band (~50% reduction) with workflow-specific adjustments — higher where the task is structured (lookups, math, formula tracing) and lower where human judgment dominates (narrative, addback validation, covenant design).
+
+#### Capability 1 — Excel Intelligence
+
+- **Meridian task:** Sponsor model intake and rebuild in firm template. Addback recategorization (sponsor's "EBITDA" → Meridian's adjusted EBITDA per credit agreement definition). KPI normalization. Schedule cleanup. Reconciliation against QoE report.
+- **Baseline:** 15–25 hours per deal at the diligence stage. Anna's Tuesday spreading session was three hours on a single sub-task; full intake of a $24M-EBITDA SaaS borrower's model runs across 2–3 working days for a Senior Associate.
+- **F2 speedup:** 60–70% reduction. Aggressive end of the F2 band because spreading is structured and benefits directly from formula-level fidelity. Conservative on the upper bound because addback validation still requires Associate judgment — the model can flag a $2.1M "one-time consulting" addback, but a human has to decide whether the underlying invoices in the data room support it.
+- **Per-deal savings:** ~10–17 hours.
+- **Annual savings at Meridian:** 12 deep-diligence deals × 13 hours = **~156 hours/year**, or ~4 weeks of Associate time.
+
+#### Capability 2 — Full-context analysis (comp screening & benchmarking)
+
+- **Meridian task:** Pull comparable closed deals from firm history and market data. Build leverage / pricing / structure tear sheet. Defend the comparable set in IC.
+- **Baseline:** 3–4 hours per comp screen at Meridian today, with the upstream cost of maintaining the firm's Excel-based closed-deal log eating another ~5 hours/quarter of Associate time.
+- **F2 speedup:** 75–85% reduction once Meridian's deal library is loaded. Highest-confidence speedup category — this is structured data lookup against a known schema, F2's strongest ground.
+- **Per-deal savings:** ~2.5–3 hours.
+- **Strategic value beyond hours:** Addresses what Golub Capital, as cited in F2's own materials, calls "anecdotal and inconsistent" benchmarking. The firm-history layer is a moat once it's built — every subsequent deal benefits from incremental enrichment of the deal library.
+- **Annual savings:** 12 deals × 2.75 hours = **~33 hours/year direct**, plus removal of the quarterly deal-log maintenance burden (~20 hours/year).
+
+#### Capability 3 — Auto-calculation and sensitivities
+
+- **Meridian task:** Build sensitivity packs for confirmatory diligence and IC. Standard cases: revenue declines, margin compression, working-capital stress, covenant headroom under each. Light auto-calc of EBITDA, leverage, interest coverage, FCC.
+- **Baseline:** 4–8 hours per deal depending on capital structure complexity. Unitranche with simple covenant package ≈ 4 hours; structures with PIK toggles, springing covenants, or asset-based revolvers ≈ 8 hours.
+- **F2 speedup:** 70–80% reduction. Fully structured math, F2's stated 99% accuracy on core financial calcs is the relevant benchmark here, and the 1% failure mode is bounded — wrong outputs are catchable on review.
+- **Per-deal savings:** ~3–6 hours.
+- **Annual savings:** 12 deals × 4.5 hours = **~54 hours/year**.
+
+#### Capability 4 — AutoReports (IC memo generation)
+
+- **Meridian task:** Draft the screening memo (1–3 pages) and full IC memo (15–25 pages with appendix). Sections include investment thesis, business overview, financial analysis, risk and mitigants, covenant package, recommendation.
+- **Baseline:** F2's own analysis cites 20–40 hours of team time per memo, attributing the figure to High Yield Harry. Meridian's mid-market unitranche memos sit in the 25–35 hour range based on peer-group convention; a Senior Associate runs the draft, the Principal edits, and the cycle absorbs 1.5–2 working days of combined investment-team time.
+- **F2 speedup:** 40–55% reduction on first draft, with the remaining time going to Associate and Principal edits. Lower than the structured workflows because narrative quality and persuasion remain human work — F2 produces the scaffolding, Meridian's people produce the conviction.
+- **Per-deal savings:** ~12–18 hours.
+- **Annual savings:** 12 deals × 15 hours = **~180 hours/year**.
+- **Why this is not a day-30 launch workflow:** The output goes directly in front of Steve and the IC. Bad memo output on day 25 risks killing the deployment. Defer until trust is established.
+
+#### Capability 5 — Audit Mode
+
+- **Meridian task:** Source-link every quantitative claim in IC packets and LP-facing materials. Survive partner Q&A and LP DDQ scrutiny.
+- **Baseline:** Hard to bound as standalone hours. Audit and source-linking work is interleaved into memo drafting; if the underlying memo is rebuilt in F2 with Audit Mode on, the source-linking is effectively free.
+- **F2 speedup:** Not a "speedup" capability. This is a **trust and defensibility** capability. The right framing for Steve and the LPs is not "saves N hours" — it's "every number F2 generates is traceable to a cell or doc, which is a precondition for any of this output going near a credit committee or LP DDQ."
+- **Strategic value:** Audit Mode is the answer to Principal-level skepticism about audit trail integrity. It is a deployment **enabler** more than an efficiency gain.
+
+#### Capability 6 — Portfolio monitoring (auto-calc on actuals)
+
+- **Meridian task:** Quarterly review of each portfolio company. Pull EBITDA off borrower reporting, reconcile to credit agreement definition, update tracker, test maintenance covenants, draft one-paragraph commentary in firm voice.
+- **Baseline:** 2–4 hours per name per quarter. Fund II has 14 active names, so roughly 35–55 hours of Associate time per quarter on monitoring.
+- **F2 speedup:** 50–60% on the analytical work, with the commentary draft as a bonus that absorbs another chunk of formerly-manual time.
+- **Per-quarter savings:** ~22 hours across the portfolio.
+- **Annual savings:** **~88 hours/year**.
+
+#### Capability 7 — LP DDQ response (AutoReports + Audit Mode applied to operational content)
+
+- **Meridian task:** Respond to LP DDQs during Fund III fundraising. ILPA DDQ 2.0 alone runs ~250 questions across 21 sections. Per AutoRFP's analysis of the standard, manual completion runs 40–60 hours per DDQ; AI tooling brings that to 8–12.
+- **Baseline at Meridian:** ~2 weeks of Senior Associate time per quarter during active fundraising — consistent with persona pain point #3.
+- **F2 speedup:** 70–80% on quantitative sections (track record, deal-by-deal attribution, risk-rating reconciliation). Lower on qualitative sections (team bios, ESG narrative).
+- **Annual savings during fundraising:** Highly variable — depends on LP volume. Expect ~120–200 hours saved across a fundraising year.
+
+### Total annualized savings — conservative
+
+Adding up the per-workflow estimates:
+
+```
+Spreading (Excel Intelligence)                ~156 hrs/yr
+Comp screening (Full-context)                  ~53 hrs/yr  (incl. deal-log maintenance)
+Sensitivities (Auto-calc)                      ~54 hrs/yr
+IC memo drafting (AutoReports)                ~180 hrs/yr
+Portfolio monitoring                           ~88 hrs/yr
+LP DDQ (during fundraising)                   ~150 hrs/yr  (mid-point estimate)
+                                               ─────────
+                                              ~681 hrs/yr
+```
+
+**~681 hours/year** = roughly 17 weeks of Associate FTE recovered, or 0.34 of a full-time-equivalent across Meridian's 6-Associate-and-Analyst layer. This is well below F2's headline "45 hrs/week saved per analyst" because (a) Meridian is a 12-person mid-market shop, not an upper-middle-market fund running 30+ active diligences, and (b) I'm using the conservative end of every speedup band.
+
+The right way to frame this number for Steve is not "F2 saves you 681 hours." It is: **"F2 buys back roughly one-third of an Associate's time across the firm — which lets you take on two more diligences a year without adding headcount, or alternatively redirects existing capacity from drudgery to source-development and live-deal work."**
+
+That second framing is what wins the buy. Hours-saved is a feature claim. Capacity-redirected is a business case.
+
+### Day-30 launch ranking
+
+#### The principle: trust-building before partner-facing
+
+The natural instinct is to launch on the highest-savings workflow first. By the math above, that would be IC memo drafting at ~180 hours/year. **That is the wrong call.**
+
+The day-30 question is not "where is F2 most valuable?" — it is "which workflows, if they go well, build enough internal trust that the deployment survives its first failure?" Three constraints govern the answer:
+
+1. **Skepticism concentrates in the middle of the org.** Principals worry about audit integrity; Associates quietly worry about being deskilled. Day-30 launch workflows must convert at least one Principal and at least two Associates into champions.
+2. **Bad output cannot reach the IC in the trust-building window.** A flawed F2 memo presented to Steve in week three kills the deployment. Period. Any workflow whose output is partner-facing within 30 days is too high-risk.
+3. **Time savings must be visible.** Abstract "you'll save hours over the year" loses to concrete "this took Anna two days last month and ninety minutes this morning." Workflows where Associates feel the saved time directly are worth more than workflows with bigger annualized numbers but diffuse experience.
+
+Under those constraints, the top three day-30 workflows are spreading, comp screening, and sensitivity packs — in that order.
+
+#### #1 — Spreading & financial model intake (Excel Intelligence)
+
+Highest-priority launch workflow for four reasons:
+
+**Visible time savings to the right audience.** Spreading is what Anna is doing on Tuesday morning. Cutting that 3-hour session to 45 minutes is the single most viscerally felt improvement in the deployment. Associates become champions on day three, not day thirty.
+
+**Quality is verifiable without Principal involvement.** A spread model is checkable against the source documents. An Associate can validate F2's output by spot-checking against the QoE report and the audited financials. No Principal needs to sign off on the workflow before it produces value, which means the deployment doesn't gate on Steve's calendar.
+
+**Low partner-facing risk.** The spread model is internal scaffolding — it feeds the memo, the comps, the sensitivities. Partners don't read spreads; they read what comes out of them. If F2 mishandles a sponsor model on day 12, the cost is one Associate redoing a model. The cost is bounded.
+
+**Builds the substrate for everything else.** Comps, sensitivities, and memos all consume the spread model. Getting Excel Intelligence working cleanly in week one is a precondition for the workflows that come next.
+
+**Day-30 milestone:** All four Associates running F2-assisted spreading on at least one live deal each. Internal validation rate (Associate accepts F2 output without material rebuild) at 80%+ on simple cap structures.
+
+#### #2 — Comp screening & deal library (Full-context analysis)
+
+Second-priority workflow for three reasons:
+
+**Direct hit on a publicly-cited pain point.** "Anecdotal and inconsistent" benchmarking is the Golub Capital framing F2 already cites in its marketing. Demonstrating that F2 closes that gap at Meridian within 30 days is a story Steve can repeat to LPs and to peer Managing Partners.
+
+**The deal library is a compounding asset.** Loading Meridian's last five years of closed deals into F2 in week one is a one-time cost that pays back on every subsequent comp screen. Day 30 looks more impressive than day 5 because the library is denser.
+
+**Low partner-facing risk, moderate Associate visibility.** Comp screens go into IC packets, but they are a discrete exhibit — partners challenge the comparable set, not the math underneath it. Associates feel the time savings (3 hours → 30 minutes) and the quality improvement (firm-history-grounded comps vs. pulling four deals from memory and a spreadsheet).
+
+**Day-30 milestone:** Last 5 years of closed deals loaded and tagged. Two live diligences using F2-generated comp screens that survived Principal review with zero structural rebuild.
+
+#### #3 — Sensitivity packs (Auto-calculation)
+
+Third-priority workflow for two reasons:
+
+**99% accuracy on core financial calcs is F2's most defensible claim.** Sensitivities are pure math. If F2 fails here, F2 fails on its strongest ground — and the deployment was always going to surface that failure, better in week three than week thirty. If F2 succeeds, Meridian gets credibility on F2's headline accuracy claim, which is the foundation for trusting the platform on more judgment-heavy workflows later.
+
+**Direct support for Principal-level work without putting F2 in front of partners.** Sensitivities are run by Associates, reviewed by Principals, and presented in IC by Principals. The Principal becomes the buffer between F2 output and partner audience — exactly the right structure during the trust-building window.
+
+**Day-30 milestone:** Standard sensitivity templates configured (15% revenue decline + margin compression; covenant headroom test; downside FCC). At least one Principal has presented an F2-generated sensitivity pack at IC and defended it under partner Q&A.
+
+### What I deliberately did *not* launch on day 30
+
+Three workflows with strong ROI cases that I am intentionally deferring past day 30:
+
+**IC memo drafting (AutoReports).** Highest annualized savings, highest partner-facing risk. Defer to days 31–60, after spreading and sensitivities have proven F2's quantitative reliability. First F2-assisted memo at IC is the **day-45 milestone**, not the day-15 milestone. Launch sequence: F2 generates sections 1–3 (Investment Thesis, Use of Proceeds, Sources & Uses), Senior Associate edits, Principal reviews against firm template before any partner sees it. Audit Mode runs in parallel from day one to make the eventual memo launch defensible.
+
+**Portfolio monitoring.** Quarterly cadence means the workflow doesn't produce visible day-30 wins unless a quarterly cycle happens to fall inside the launch window. Better as a days-60–90 expansion when there's a natural quarter-close to anchor on. The exception: if Meridian's Q4 close lands in the launch window, this moves up to day 30.
+
+**LP DDQ response.** Tactical, timing-dependent. Worth pre-configuring the firm-content library (track record, deal attribution, ESG narrative, operational policies) during days 1–30 so it's ready when a DDQ arrives — but the workflow itself is "launched" the moment the next LP DDQ comes in, not on a fixed day.
+
+### What success looks like at the end of day 30
+
+Concrete metrics for the QBR-equivalent at day 30:
+
+- **Adoption breadth:** 4 of 4 Associates have run F2 on at least one live deal. 2 of 3 Principals have reviewed F2 output and approved it for IC packet inclusion.
+- **Time-savings realized:** Tracked per-deal hours-spread for two live diligences. Target: 50%+ reduction vs. Meridian's 90-day historical baseline on comparable deal types.
+- **Output quality:** Internal validation rate (output accepted without material rebuild) at 80%+ on spreading, 85%+ on comps, 90%+ on sensitivities.
+- **Audit posture:** Every F2-generated number in any IC-bound exhibit is source-linked. Zero exceptions.
+- **Champions identified:** At least one Associate and one Principal who would defend F2 in a hallway conversation with Steve.
+
+Day-30 success is not "F2 is fully deployed at Meridian." Day-30 success is "F2 has earned the right to launch IC memo drafting in days 31–45."

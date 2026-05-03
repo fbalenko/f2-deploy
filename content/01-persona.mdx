@@ -1,0 +1,89 @@
+# Customer Persona — Meridian Credit Partners
+
+*Meridian Credit Partners is a fictional composite, modeled on the publicly disclosed strategies, fund sizes, and team shapes of mid-market sponsor-led direct lenders in the $1–2B AUM band. Names and specific deal details are placeholders; pain points and workflow patterns are drawn from cited public sources.*
+
+### Snapshot
+
+- **Strategy** — Sponsor-led direct lending, North American mid-market
+- **AUM** — $1.2B
+  - **Fund II** — $750M, 78% deployed across 14 active names
+  - **Fund III** — $450M raised on a $750M target; first close Q2 2026
+- **Hold profile** — $15M–$60M unitranche; selective second-lien; clubs up to $90M with rotating co-lenders
+- **Sectors** — Vertical SaaS, tech-enabled business services, healthcare services (PPM, multi-site outpatient), light industrial / specialty manufacturing
+- **HQ** — Midtown Manhattan, 14 FTE total
+- **Vintage** — Founded 2018; first fund $300M, fully realized 2024 at 1.6x net
+
+### Team (12 investment professionals)
+
+- **Managing Partner** — *Steve K.*, 22 years, ex-tier-one direct lender, founder
+- **Partners (2)** — sector heads (SaaS/Healthcare; Industrial/Services)
+- **Principals (3)** — run live processes end-to-end
+- **Associates (4)** — model build, memo draft, portfolio monitoring
+- **Analysts (2)** — spreading, comp screening, data-room hygiene
+
+Plus 2 non-investment FTE (CFO/IR/Fund Admin) outside scope.
+
+### Deal flow (LTM)
+
+- ~40 IOIs reviewed
+- ~22 second-round meetings
+- ~12 advance to confirmatory diligence
+- **6–8 close**
+- Median IOI-to-funding: 9 weeks (sponsor-led repeats; cold processes run 12–14)
+
+### Current stack
+
+- **Modeling** — Excel. Bespoke per analyst. No firm-wide template library.
+- **CRM / pipeline** — DealCloud, lightly utilized. Partners track top-of-funnel in their heads.
+- **Data rooms** — SharePoint (sponsor-managed, ~70%); Datasite (~30%)
+- **Expert calls** — Tegus, occasional GLG
+- **Comps / market data** — Refinitiv LPC, S&P LCD, internal closed-deal log (Excel)
+- **No AI tools deployed.** Two Associates use personal ChatGPT Plus accounts. Firm has no AI policy yet.
+
+### A Tuesday with Anna, Senior Associate
+
+- **8:15** — Inbox. Three teasers from MD-tier sponsors. Forwards one to her Principal with a 2-line read.
+- **8:45** — Opens Q3 monitoring template for portfolio name *Beacon Software*. Pulls EBITDA off the borrower's reporting package, reconciles to the credit agreement definition, updates the model. Maintenance covenant test in two weeks.
+- **10:30** — Spreading. Sponsor model came with the CIM — vertical SaaS, ~$24M EBITDA. Anna rebuilds it in firm template: standardizes revenue cohorts, recategorizes addbacks, maps QoE adjustments. **Three hours of structured drudgery.**
+- **13:30** — Management call. Sponsor's CFO walks through working-capital seasonality on a different live deal. Principal drives; Anna takes notes.
+- **15:00** — Comp screen for Thursday's IC. Pulls four "comparable" closed deals from the firm log; builds a side-by-side leverage / pricing / structure tear sheet. The judgment call on which deals are comparable is hers — and she'll get challenged on it Thursday.
+- **17:30** — IC memo draft, sections 1–3. Iterates with her Principal until 9pm.
+
+**Day's split** — ~4 hours real analysis, ~3 hours structured drudgery, ~1 hour reactive. The drudgery is what F2 is buying back.
+
+### Pain points — common to mid-market direct lenders in this peer group
+
+1. **Spreading drag.** Associates spend disproportionate hours rebuilding sponsor models in firm template — addback recategorization, KPI normalization, schedule cleanup. PwC names spreading financial statements among the repetitive, time-consuming underwriting tasks that AI-driven origination tools are now automating, alongside risk rating calculations, document processing, and compliance checks.
+   *Source: PwC, "Strategies for banks to compete and work with private credit," 2025.*
+
+2. **Screening turnaround.** Partners want a 1-pager 24 hours after the teaser, not five days. F2's own analysis frames IC memos as the bottleneck — teams spending 20–40 hours assembling data, formatting charts, and aligning to credit boxes — with memo turnaround speed determining who wins the allocation in competitive auctions. Or in Don Muir's framing: firms that win the bid are those that can move first.
+   *Source: F2 blog, "How Private Credit Teams Use AI to Accelerate Underwriting," citing High Yield Harry; Don Muir (CEO, F2).*
+
+3. **LP DDQ burden.** The average PE fund now responds to 150+ DDQs annually — up 40% from five years ago — with each questionnaire averaging 250 questions across 21 categories. ILPA DDQ completion alone runs 40–60 hours manually before AI tooling brings it to 8–12. ILPA's own framing of the historical state: customized DDQs created an *"extraordinary administrative burden"* on GPs and LPs alike.
+   *Source: AutoRFP.ai analysis of ILPA DDQ 2.0; ILPA Due Diligence Questionnaire 2.0 (Nov 2021).*
+
+4. **Institutional memory gap.** Benchmarking new deals against firm history is, in Golub Capital's framing as cited by F2, *"anecdotal and inconsistent"* without a deal library layer. The Q&A and notes from past IC meetings represent the firm's collective investment judgment but get buried in disorganized SharePoint folders.
+   *Source: F2 blog citing Golub Capital; Meridian AI, "How Top PE Firms Run Investment Committees in 2025."*
+
+### Buying motion
+
+Top-down adoption following a competitive loss is the modal entry point for AI tooling in this peer group: a Managing Partner watches a competitor execute faster on a live deal, a vendor demo lands at an industry event (SuperReturn, ALM private credit conferences, ABS East), and procurement moves top-down on a 60–90 day evaluation cycle.
+
+Skepticism concentrates in the middle of the org. Principals worry about audit trail integrity in LP DDQ contexts. Associates quietly worry about being deskilled. **That skepticism is the deployment job** — not the contract.
+
+### Workflow map and F2 plug-in points
+
+```
+Sourcing → [Pre-screen / IOI] → Term sheet → [Confirmatory diligence]
+        → [Credit memo build] → [IC packet] → Docs → Funding → [Portfolio monitoring]
+```
+
+Bracketed stages = the **5 highest-leverage F2 plug-in points** at Meridian:
+
+1. **Pre-screen / IOI** — Excel Intelligence ingests sponsor model + CIM; AutoReports generates the 24-hour 1-pager Steve has been asking for
+2. **Confirmatory diligence** — Sensitivity packs, QoE addback validation against source docs, comp screens grounded in firm history (not Refinitiv averages)
+3. **Credit memo build** — AutoReports drafts sections 1–3 of firm template; Associates edit upward instead of starting from blank
+4. **IC packet** — Audit Mode supplies source-linked exhibits; partners click any number, see the cell
+5. **Portfolio monitoring** — Quarterly actuals vs. base case, covenant headroom flags, commentary drafted in firm voice
+
+**Where F2 does *not* plug in for Meridian** (explicitly out of scope, day 1): sourcing (relationship-driven), term-sheet negotiation (judgment), legal documentation (counsel), funding mechanics (treasury).

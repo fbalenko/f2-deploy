@@ -1,0 +1,207 @@
+# The 30/60/90 Deployment Plan for Meridian
+
+### How to read this section
+
+This is where Sections 1–4 turn into a calendar. The persona told us who the customer is. The workflow decomposition told us what to launch with and why. The prompt library is the technical content the deployment ships. The audit rubric is the operating framework that catches failures before they reach partners. The 30/60/90 is the timeline that ties all four into a sequence that produces a successful deployment by day 90.
+
+Three principles govern the plan:
+
+1. **Build trust before reaching for value.** Every workstream is sequenced to produce a visible win for the next-most-skeptical stakeholder. Day-30 wins target Associates. Day-60 wins target Principals. Day-90 wins target the Managing Partner and the LPs.
+2. **Risk-management dominates day-1–30 design.** The first 30 days exist to demonstrate that F2 doesn't break in obvious, visible ways. Ambitious launches in this window are how deployments fail.
+3. **Realistic uncertainty is named, not hidden.** Each phase identifies what could go wrong, what the mitigation is, and what the contingency is. A deployment plan that doesn't name its own failure modes is selling, not planning.
+
+<Day90Timeline />
+
+### Pre-deployment week (Day -7 to Day 0)
+
+Before day one, three workstreams have to be in place. None of these are billable F2 deployment work — they're customer-success preconditions that determine whether the deployment can even start.
+
+**Customer success handoff.** Sales closed Meridian; the deployment strategist needs the full discovery package. Specifically: the buying-motion narrative (who championed it, who pushed back, what concerns surfaced in the procurement cycle), the technical fit conversation notes, any contractual commitments F2 made about specific outcomes, the list of decision-makers and their concerns. This is a 2-hour internal meeting at F2, not a customer-facing event.
+
+**Stakeholder mapping.** Before I introduce myself to Meridian, I need a stakeholder map naming every person I'll work with, their role, their concern, and their decision-making weight. For Meridian: Steve K. (MP, sponsor of the deployment, decision authority on continuation), the two sector-head Partners (passive in the buying motion, will weigh in at day-90 QBR), three Principals (skeptical, audit-trail-focused, primary review layer for memo work), four Associates (will become champions if Tier 1 lands; will become resistors if it doesn't), two Analysts (most directly affected by Excel Intelligence, lowest political weight). Two non-investment FTE (CFO and IR/Fund Admin) come in at day 30+.
+
+**Technical preconditions.** SSO requirements (Meridian uses Okta), data residency questions for the LP DDQ workstream, retention policy alignment to Fund III's LP-A obligations.
+
+### Days 1–14 — Foundation
+
+The first two weeks are configuration, ingestion, and stakeholder calibration. No live deal work in this window.
+
+**Day 1 — Kickoff.** Two-hour kickoff call with Meridian's full investment team. Steve introduces me to the team. I take 90 minutes of questions. The question I'm watching for: who in the room is asking risk questions? That person becomes my primary day-30 ally on the Principal layer.
+
+**Days 2–5 — SSO, retention, infrastructure.** Configuration work. Okta SSO integration. Retention policy configuration to match Fund III's LP DDQ commitments (typically: 7-year retention on all deal-related materials). Data residency review.
+
+**Days 3–7 — IC template ingestion and voice calibration.** Ingest Meridian Template v4 and Voice Guide v2. Generate test memo sections from old, anonymized Meridian deals, compare F2's output to the partner-approved historical memo, identify voice drift, iterate. Voice calibration is the single most under-budgeted workstream in AI deployments at investment firms. I budget 25 hours for voice calibration in days 3–7.
+
+**Days 7–10 — Deal library ingestion.** Load Meridian's last 3-5 years of closed deals into F2's deal library. Each closed deal needs to be tagged with: GICS sub-industry, EBITDA at close, capital structure type, sponsor archetype, closing date, hold size, exit status. I do this with one Associate.
+
+**Days 10–14 — First Tier 1 prompt configuration.** Configure Prompts 1, 3, and 4 (spreading, comps, sensitivities) for live use. Run each prompt against 2-3 historical deals. Acceptance rate target: 80% on Tier 1 prompts by end of day 14.
+
+#### Day 14 milestone
+
+- SSO live, retention policy confirmed, data residency cleared
+- Voice calibration signed off by Steve + one Principal
+- Deal library loaded and tagged: ~40-60 closed deals
+- Tier 1 prompts (1, 3, 4) configured with 80%+ acceptance rate on historical test cases
+- Internal champions identified: at least one Associate and one Principal
+
+### Days 15–30 — First live deals
+
+Days 15–30 are the highest-risk window of the deployment. Two Associates run F2 on at least one live deal each. Daily 15-minute standups. Every output passes through the Section 4 audit rubric.
+
+**Days 15–18 — Live deal #1 (Tier 1 only).** The first live deal runs Prompt 1 (spreading), Prompt 2 (addback validation), Prompt 3 (comp screen), and Prompt 4 (sensitivities). The drafting Associate (Anna) runs the prompts. I run the audit rubric on every output before it reaches her Principal. The rubric runs in real time.
+
+**Days 18–25 — Live deal #2 + lessons-learned iteration.** By day 18, I should have enough audit data from deal #1 to identify which prompts need iteration. I update Prompts 1-4 in a versioned change log (Meridian Prompt Library v1.1) and re-run the updated prompts on deal #2.
+
+**Days 25–30 — Day-30 milestone preparation.** Materials: a short memo (3-4 pages) titled "Day-30 Deployment Status — Meridian." Content: adoption metrics, time-savings realized, output quality (acceptance rates by prompt, audit failure rates by axis), engineering tickets opened and resolution status, prompt iteration log, named risks for days 31–60.
+
+#### Day 30 milestone
+
+- Tier 1 prompts running on 2+ live deals with 80%+ acceptance rate
+- 4 of 4 Associates have run F2 on at least one deal
+- 2 of 3 Principals have reviewed F2 output and approved for IC packet inclusion
+- Time-savings realized: 50%+ reduction on spreading vs. baseline, 75%+ on comp screening
+- Audit failure rate trending: source grounding ≤5%, calculation fidelity ≤2%, completeness ≤10%
+- At least 3 engineering tickets logged with F2 platform team, with at least 1 resolved
+- Internal champions confirmed: 1 Associate, 1 Principal
+
+### Days 31–60 — Tier 2 launch and IC memo milestone
+
+This is the phase where the deployment graduates from internal scaffolding to partner-facing output. The day-45 milestone — first F2-assisted IC memo at credit committee — is the single most important event of the entire 90-day deployment.
+
+**Days 31–37 — Onboard remaining investment professionals.** Days 31-37 onboard the remaining 6 investment professionals (the third Principal, the two Partners, the Managing Partner, two Analysts). The two Partners and the MP don't run F2 themselves. They review F2 output.
+
+**Days 31–40 — Tier 2 prompt configuration and dry runs.** Configure Prompts 5, 6, 7, 8 (covenant design, screening memo, IC memo §1-3, risk and mitigants). Voice calibration on Tier 2 is even more important than on Tier 1, because Tier 2 outputs are partner-facing. By day 40, all four Tier 2 prompts have a 70%+ acceptance rate on historical test cases.
+
+**Days 40–45 — First live IC memo with F2 assistance.** Day-45 milestone: first F2-assisted IC memo at credit committee. The Senior Associate (Anna) drafts the memo using F2-generated §1-3 and §6. She edits all four sections heavily. Her Principal reviews the full memo. Three layers of audit: I run the full audit rubric on the F2 outputs at the Associate-edit stage and again after Principal review.
+
+**What success looks like at day 45.** Partners have substantive Q&A on the deal, not on the memo's quality. Citations hold up under spot-checking. No partner asks "did F2 write this section?" in a tone that suggests skepticism.
+
+**Days 45–55 — Meridian-specific prompt library v1.** The lessons from the first IC memo plus the cumulative iterations from days 1-45 produce **Meridian Prompt Library v1.0**. This is the document I leave behind if I'm hit by a bus on day 56.
+
+**Days 55–60 — First LP DDQ response.** By day 55, Meridian has likely received at least one Fund III LP DDQ. I run Prompt 10 on it. Every quantitative claim has to be source-linked because LPs DO spot-check, especially during an active fundraising.
+
+#### Day 60 milestone
+
+- 12 of 12 investment professionals onboarded
+- Tier 2 prompts (5, 6, 7, 8) live with 70%+ acceptance rate
+- First F2-assisted IC memo successfully presented at credit committee
+- Meridian Prompt Library v1.0 documented and shared
+- First LP DDQ response delivered with F2 assistance
+- Audit failure rates continuing to decline: source grounding ≤2%, calculation fidelity ≤1%, completeness ≤5%
+- 5+ engineering tickets logged, at least 2 resolved
+
+### Days 61–90 — Expansion and QBR
+
+The last 30 days are about three things: extending into Tier 3 workflows, completing the first quarterly cadence, and preparing for the day-90 QBR.
+
+**Days 61–70 — Portfolio monitoring launch.** Fund II has 14 active names; each gets a Prompt 9 (portfolio monitoring quarterly review) run against its Q[X] reporting package. ~28 hours of Associate time across the portfolio (vs. 35-55 hours historical baseline). The monitoring run produces the firm's quarterly LP letter draft.
+
+**Days 70–80 — DDQ scaling and remaining LP responses.** Multiple LP DDQs in flight. Volume target by day 80: 5-8 LP DDQs responded to with F2 assistance.
+
+**Days 80–88 — QBR preparation.** QBR materials: metrics dashboard (deals processed, hours saved, MD review-cycle reduction, IC pushback rate, monitoring cycle time, DDQ turnaround time), audit failure summary (3-month roll-up by axis), engineering ticket log, prompt library v2.0, day-90 commitments for days 91-180.
+
+**Day 90 — QBR.** 90-minute meeting. Steve, both Partners, three Principals, plus me. I present the dashboard in 30 minutes. Discussion in 60 minutes.
+
+The decision the QBR drives: continued deployment authorization. Three possible outcomes:
+
+**Full expansion.** Metrics meet or exceed targets. The deployment continues with expanded scope.
+
+**Continuation with constraints.** Metrics are mixed. Specific workflows are working well; others are paused.
+
+**Pause.** Metrics underperform materially. The deployment pauses pending fundamental rework. This is the failure outcome and it's named honestly.
+
+#### Day 90 milestone
+
+- All 10 prompts deployed with documented acceptance rates
+- 4-6 IC memos completed with F2 assistance
+- Q[X] portfolio monitoring cycle completed: 14 names reviewed in ~50% of historical time
+- 5-8 LP DDQ responses delivered
+- Total time saved: ~150-200 hours over 90 days, extrapolating to roughly 600-800 hours annualized
+- Meridian Prompt Library v2.0 documented and operational
+- Continued deployment authorization received
+
+### Risks and mitigations
+
+Six named risks, ranked by likelihood × severity.
+
+#### Risk 1 — Senior partner skepticism crystallizes around a specific failure
+
+**Likelihood: HIGH. Severity: CRITICAL.**
+
+The single most-likely deployment-killing event is a specific F2 failure that lands in front of Steve or one of the Partners and confirms a pre-existing skepticism.
+
+**Leading indicator.** Audit failure rates trending up rather than down across days 14-30. Specific failures clustering around partner-visible workstreams.
+
+**Mitigation.** Three layers of audit before any output reaches a partner. Aggressive prompt iteration on any failure mode that recurs more than twice. Voice-of-customer escalation to F2 engineering on any structural failure that prompt-side fixes can't address.
+
+**Contingency.** If a partner-visible failure occurs, I escalate to Steve directly within 24 hours, present the root-cause analysis, the prompt-side fix, the engineering ticket, and the timeline to resolution. Honest accounting of what went wrong is the only viable response.
+
+#### Risk 2 — Data leakage in DDQ contexts
+
+**Likelihood: MEDIUM. Severity: HIGH.**
+
+LP DDQs require firm-confidential information to be processed by F2. If F2's processing environment is not airtight to Meridian's standards, or if an LP discovers Meridian uses F2 in DDQ responses without disclosure, the firm's LP relationships are at risk.
+
+**Leading indicator.** Any LP asks about Meridian's use of AI tools in operational responses. F2's data residency or processing-environment posture changes mid-deployment.
+
+**Mitigation.** Pre-deployment data residency review. Explicit retention policy aligned to LP-A obligations. Conservative default on what data F2 ingests for DDQ workstreams.
+
+**Contingency.** If an LP raises concerns, Meridian responds with the data-handling documentation prepared during pre-deployment, names F2's use explicitly, and offers to walk through the audit trail on any specific response.
+
+#### Risk 3 — Model fatigue / Associate disengagement
+
+**Likelihood: MEDIUM. Severity: MEDIUM.**
+
+After 60-90 days, Associates may begin trusting F2 outputs without rigorous review. Audit failure rates plateau or rise.
+
+**Leading indicator.** Audit failure rates flat or rising across days 45-75. Associate self-reports indicating they "trust F2 by now" on workflows where the rubric should still run.
+
+**Mitigation.** Ongoing audit cadence (every output, no exceptions). Quarterly recalibration: at days 90, 180, 270, run a "rubric refresh."
+
+**Contingency.** If model fatigue becomes a documented pattern, I run a 1-day "audit reset" workshop with all four Associates, walking through 5-10 specific failure cases to recalibrate vigilance.
+
+#### Risk 4 — Voice drift across prompt iterations
+
+**Likelihood: MEDIUM. Severity: MEDIUM.**
+
+Each prompt iteration to fix a specific failure can introduce subtle voice drift elsewhere.
+
+**Leading indicator.** Principals start editing F2-generated memo sections more heavily across days 60-90.
+
+**Mitigation.** Voice regression testing built into the prompt iteration cycle. Every prompt update must produce output indistinguishable from the historical Template v4 baseline on a held-out test set of 3-5 historical memos.
+
+**Contingency.** If voice drift surfaces, schedule a 2-day voice recalibration sprint with Steve and one Principal.
+
+#### Risk 5 — Customer-side resource constraints
+
+**Likelihood: MEDIUM. Severity: MEDIUM.**
+
+The deployment requires meaningful customer-side time investment. If the firm's deal flow accelerates mid-deployment, customer-side capacity may evaporate.
+
+**Leading indicator.** Standup attendance drops. Voice calibration reviews delay by more than 48 hours.
+
+**Mitigation.** Front-load the highest-customer-time-cost work in days 1-14 when Meridian has full attention on the deployment.
+
+**Contingency.** If customer-side capacity evaporates, I extend the timeline rather than compromising on quality.
+
+#### Risk 6 — F2 platform-side stability or capability changes
+
+**Likelihood: LOW (in 90-day window). Severity: HIGH.**
+
+F2 is an early-stage company; product changes mid-deployment are possible.
+
+**Leading indicator.** F2 internal communications about pending platform changes.
+
+**Mitigation.** Direct relationship with F2 product/eng leadership. Early warning on breaking changes.
+
+**Contingency.** If a breaking change ships mid-deployment, escalate to F2 leadership within 24 hours, propose a customer-side workaround for the affected window.
+
+### What this plan deliberately doesn't promise
+
+I'm not promising the headline 45 hrs/week saved per analyst that F2 markets — that's an upper-bound number from F2's marketing materials, not a Meridian-specific projection.
+
+I'm not promising IC pushback rate goes to zero on F2-assisted memos. Partners challenge memos. The right metric is "pushback focused on the deal substance, not the memo quality."
+
+I'm not promising every workflow scales linearly to all sectors. SaaS deals will work better in Tier 1 than industrial deals.
+
+I'm not promising no engineering tickets stay open at day 90. Naming them honestly in the QBR is better than pretending they're resolved.

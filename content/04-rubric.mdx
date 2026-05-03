@@ -1,0 +1,152 @@
+# Output Audit Rubric
+
+### How to read this section
+
+The audit rubric is the deployment strategist's most-used tool. Every F2 output that touches an IC packet, an LP DDQ, or an internal credit decision passes through some version of this rubric before it ships — sometimes as a 30-second mental checklist, sometimes as a formal review for high-stakes outputs. The rubric is not an academic framework; it's a working artifact.
+
+This section does three things:
+
+1. Defines the five audit axes and what passing each looks like in practice
+2. Walks through a deliberately flawed sample IC memo excerpt to demonstrate the rubric catching three specific failures
+3. Shows how each caught failure decomposes into a prompt-side fix and an engineering ticket — the JD's "audit reports, flag issues to engineering" bullet rendered as operational practice
+
+### The five audit axes
+
+#### Axis 1 — Source grounding
+
+**The standard.** Every quantitative claim in the output traces to a specific cell in the source workbook, a specific page in a source PDF, or a specific entry in the firm's deal library. Audit Mode is the platform feature; source grounding is the deployment-strategist's verification that Audit Mode is producing complete and accurate citations.
+
+**What passing looks like.** A reviewer can click any number in any output and land on the underlying source within one click. Citation includes document name, page or cell, and (for cell references) the named tab. Aggregations and computed values cite their input cells, not just an output cell.
+
+**What failure looks like.**
+- Number appears without citation
+- Citation points to a document that doesn't exist or doesn't contain the cited number
+- Citation is a vague "QoE report" without page/section
+- Computed number cites the cell containing the computed result rather than the inputs that produced it
+
+**Why this axis is first.** A source-grounding failure invalidates every downstream check. If the underlying number is wrong, the math being correct is irrelevant. Source grounding is the foundation; the other four axes assume it has passed.
+
+#### Axis 2 — Calculation fidelity
+
+**The standard.** Math is reproducible. Formulas are explicit. Conventions match the credit agreement and Meridian template. Aggregations sum correctly. Year-over-year and ratio calculations are internally consistent across the document.
+
+**What passing looks like.** Reviewer pulls any computed metric, recomputes from the cited inputs, and gets the same answer to within rounding. Conventions are stated explicitly when they could be ambiguous (e.g., "LTM EBITDA per credit agreement §3.2 definition," not just "LTM EBITDA").
+
+**What failure looks like.**
+- Sums don't add up
+- Ratios computed against wrong base (e.g., gross EBITDA instead of adjusted)
+- LTM convention inconsistent across the document (LTM stated for one metric, annualized for another, no flag)
+- Currency conversion or fiscal-year alignment errors
+- Off-by-one period errors (Year 1 numbers labeled as TTM, etc.)
+
+**Why this axis is second.** F2's most defensible marketed claim is 99% accuracy on core financial calcs. Calculation fidelity is the rubric's check on that claim. A failure here is a high-confidence engineering ticket — if F2 can't compute correctly, the deployment doesn't survive.
+
+#### Axis 3 — Completeness
+
+**The standard.** The output covers every required section of the firm template, includes every required exhibit, and addresses every standard analytical workstream. Missing sections are either explicitly marked as "not applicable" with rationale or completed.
+
+**What passing looks like.** Reviewer pulls the template checklist (Meridian Template v4 has, for instance, 14 required sections in a full IC memo) and ticks off each one against the F2 output. Every box is ticked, or the omission is justified.
+
+**What failure looks like.**
+- Required section silently omitted
+- Required exhibit (e.g., Sources & Uses table, sensitivity pack) missing
+- "TBD" or placeholder text in shipped output
+- Section header present but content thin (e.g., "Risks" section with two generic bullets when template requires 5-7 ranked risks with mitigants)
+
+**Why this axis sits in the middle.** Completeness failures are easier to catch than the first two axes (you're checking presence/absence, not correctness) but they're also the failure mode most likely to embarrass the deployment. A partner pulling up an F2-drafted memo and finding the Sensitivities section missing is a credibility event; the partner doesn't need to verify any math to know the output is incomplete.
+
+#### Axis 4 — Risk surfacing
+
+**The standard.** The output proactively identifies concerns the reader needs to know about. It does not summarize what the borrower or sponsor said; it interrogates it. Adverse facts are surfaced with appropriate severity, not buried.
+
+**What passing looks like.** A reviewer reading only the F2 output (without access to underlying documents) can identify the top three things that could go wrong with the deal. Risks are ranked by severity and likelihood, not just listed. Adverse trends in source data trigger explicit callouts.
+
+**What failure looks like.**
+- Output reads as borrower advocacy ("strong management team," "favorable market dynamics")
+- Adverse data (declining margins, customer concentration, working capital deterioration) appears in the data but is not flagged in narrative
+- Risk section lists generic risks without deal-specific framing
+- Mitigants disconnected from structural features (vague "we will monitor" rather than specific covenant or collateral element)
+
+**Why this axis is fourth.** Risk surfacing is the most judgment-heavy axis and the hardest to make pass/fail. It's also the axis where AI-drafted content most consistently fails — the Pollyanna failure mode is well-documented across language models. The deployment strategist's job is to push back hard here, including on outputs that pass the first three axes cleanly.
+
+#### Axis 5 — Tone calibration
+
+**The standard.** The output reads in Meridian's voice, not the sponsor's voice and not the AI's default voice. Hedge language is used appropriately. Marketing language is absent. The output would be indistinguishable from a partner-approved memo from firm history if voice were the only attribute considered.
+
+**What passing looks like.** Reviewer compares F2 output to a recent partner-approved memo on a similar deal type. Voice is consistent. No "compelling," "best-in-class," or "transformational" without quantitative substantiation. Hedging is calibrated to genuine uncertainty, not used as a stylistic default.
+
+**What failure looks like.**
+- Sponsor pitch language imported into investment thesis ("compelling acquisition opportunity")
+- AI-default hedging applied uniformly ("the company appears to potentially have...")
+- Marketing superlatives without quantitative support
+- Inconsistent voice across sections (Section 1 reads as sponsor pitch, Section 6 reads as AI summary, neither reads as Meridian)
+
+**Why this axis is last.** Tone is the most cosmetic axis but it's also the partner-trust axis. A memo that fails tone calibration but passes the first four can survive deployment with extensive editing. A memo that fails the first four cannot survive at any tone.
+
+### The deliberately flawed sample
+
+Below is an excerpt from a fictional F2-drafted IC memo for "Project Cypress" — a $35M unitranche financing for a vertical SaaS borrower. The excerpt covers the Investment Thesis (§1.2) and the leading paragraphs of the Financial Analysis (§4) sections. It is constructed to fail three audit axes specifically: source grounding, calculation fidelity, and risk surfacing.
+
+The sample is realistic in length and density for a Tier-2-prompt output (Prompt 7, IC memo sections 1–3). Read it cold, then watch the rubric apply.
+
+---
+
+#### [SAMPLE — F2 DRAFT, PRE-AUDIT]
+
+**§1.2 Investment Thesis**
+
+Cypress represents a compelling lending opportunity in the vertical SaaS sector, supported by best-in-class unit economics and a sponsor with a strong track record of value creation. The company has demonstrated robust revenue growth, with TTM revenue of approximately $48M reflecting 34% year-over-year growth from FY2024. Adjusted EBITDA of $14.2M implies a 30% margin, which is industry-leading among comparable assets in our deal library.
+
+The investment thesis rests on three pillars:
+
+*Predictable, contracted revenue base.* Cypress generates approximately 78% of revenue from multi-year contracts with average remaining duration of 2.4 years, providing significant cash flow visibility for debt service. Net revenue retention of 112% indicates strong customer expansion dynamics.
+
+*Defensible market position.* Cypress operates in the construction project management software vertical, where it competes with Procore and a number of smaller players. Management indicates Cypress has won over 60% of competitive deals in the past 12 months, reflecting product superiority and customer references.
+
+*Aligned sponsor with sector expertise.* The sponsor, Marlin Equity Partners, has deployed over $2B across vertical SaaS investments and has owned Cypress since 2022. Sponsor equity contribution of $52M represents 38% of total capitalization, well above the 30% threshold Meridian typically requires.
+
+**§4 Financial Analysis (excerpt — opening paragraphs)**
+
+Cypress's financial profile supports the proposed unitranche structure. TTM revenue of $48M and Adjusted EBITDA of $14.2M produce total leverage of 4.1x and senior leverage of 4.1x at close, well within Meridian's risk tolerance for sponsor-led SaaS transactions. Free cash flow conversion of approximately 85% (Adjusted EBITDA less capex less change in NWC, divided by Adjusted EBITDA) provides ample coverage for the proposed $2.4M of annual cash interest.
+
+Adjusted EBITDA includes $3.1M of management addbacks, primarily related to one-time professional fees associated with the 2024 acquisition of a smaller competitor and run-rate cost savings from completed integration activities. Both addback categories are well-supported by data room evidence and consistent with Meridian's standard addback acceptance criteria.
+
+The sensitivity pack (Exhibit 4-A) demonstrates resilient performance under standard downside scenarios. Under a 15% revenue decline scenario, adjusted EBITDA compresses to approximately $11M, and total leverage tests at 5.2x — within the proposed maintenance covenant of 5.50x.
+
+---
+
+#### [END SAMPLE]
+
+### The audit, applied
+
+The rubric runs in axis order. I'm catching three failures across three different axes.
+
+<AuditCatches />
+
+### What the audit doesn't catch
+
+A note on the rubric's limits, because over-claiming is itself a deployment-strategist failure mode.
+
+The rubric catches three categories of failure cleanly: missing citations, math errors, and judgment-shaped issues like risk-surfacing weakness. It does not catch:
+
+1. **Subtle factual errors.** If F2 cites a real source that contains a real number, but the number is wrong because the source itself is wrong (e.g., a sponsor's CIM contains an error in TTM revenue and F2 faithfully reproduces it), the rubric will not catch it. Source grounding passes; calculation fidelity passes; the underlying error survives.
+
+2. **Wrong-comp-set selection at the retrieval layer.** If F2 pulls a comp set from the deal library that includes deals an experienced underwriter would not consider truly comparable, the rubric won't catch it without a separate retrieval-quality check. Prompt 3's audit checklist addresses this at prompt level; the broader rubric does not.
+
+3. **Strategic misreads.** If the deal is structurally fine but represents a bad strategic decision for Meridian (e.g., adds concentration risk to an already-overweighted sector), no quantitative or narrative axis surfaces this. Strategic read is partner-judgment work that no AI output should replace.
+
+The audit rubric is a defensive tool. It catches the failures that would embarrass the deployment if they reached IC. It is not a substitute for partner judgment, and the deployment strategist who frames it as such is overreaching.
+
+### How the rubric operates day-to-day
+
+For Meridian specifically, here's how the rubric runs in practice:
+
+**Tier 1 outputs (spreading, comps, sensitivities, addbacks).** Associates run the rubric themselves on every output, using the per-prompt audit checklists from Section 3. Failures are documented in a shared log. Pattern-failures (the same axis failing on 3+ outputs in a week) get escalated to me.
+
+**Tier 2 outputs (memo sections, covenant proposals, risk sections).** The deployment strategist runs the full rubric on every output before it reaches a Principal. Principals run an abbreviated rubric (axes 4 and 5 — risk surfacing and tone) before partner distribution.
+
+**Tier 3 outputs (DDQ responses, monitoring commentary).** IR team and Associates run rubric in parallel — IR for tone calibration and completeness, Associates for source grounding and calculation fidelity.
+
+**Engineering feedback loop.** Every rubric failure produces a ticket in the format above. Tickets aggregate weekly. I run a 30-minute call with F2 engineering every other week to walk through the top 3-5 tickets, prioritize platform fixes, and confirm prompt-side workarounds where engineering fixes are out-of-scope or longer-timeline. The Voice of Customer bullet in the JD is exactly this loop.
+
+This cadence is what turns the audit rubric from an abstract framework into the operational backbone of the deployment.

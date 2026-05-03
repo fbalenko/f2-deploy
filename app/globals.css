@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  background: #FAFAF7;
+  color: #0F0F0F;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  font-family: "Iowan Old Style", Charter, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+@media (min-width: 768px) {
+  body { font-size: 18px; }
+}
+
+/* Reading prose container */
+.prose-brief {
+  max-width: 720px;
+  color: #0F0F0F;
+}
+.prose-brief p {
+  margin: 0 0 1.1em 0;
+}
+.prose-brief ul,
+.prose-brief ol {
+  margin: 0 0 1.1em 1.4em;
+  padding: 0;
+}
+.prose-brief ul { list-style: disc; }
+.prose-brief ol { list-style: decimal; }
+.prose-brief li {
+  margin-bottom: 0.4em;
+}
+.prose-brief li > ul,
+.prose-brief li > ol {
+  margin-top: 0.4em;
+}
+.prose-brief h2 {
+  font-family: "Iowan Old Style", Charter, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.55rem;
+  line-height: 1.25;
+  font-weight: 600;
+  margin: 2.4rem 0 1.2rem;
+  letter-spacing: -0.005em;
+  scroll-margin-top: 96px;
+}
+.prose-brief h3 {
+  font-family: "Iowan Old Style", Charter, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.2rem;
+  line-height: 1.3;
+  font-weight: 600;
+  margin: 1.8rem 0 0.6rem;
+  scroll-margin-top: 96px;
+}
+.prose-brief h4 {
+  font-family: "Iowan Old Style", Charter, Georgia, Cambria, "Times New Roman", serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 1.4rem 0 0.5rem;
+}
+.prose-brief a {
+  color: #2D4A6B;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.prose-brief a:hover { opacity: 0.7; }
+.prose-brief strong { font-weight: 600; }
+.prose-brief em { font-style: italic; }
+.prose-brief blockquote {
+  margin: 1.2em 0;
+  padding-left: 1em;
+  border-left: 2px solid #E5E5E2;
+  color: #4a4a47;
+  font-style: italic;
+}
+.prose-brief code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88em;
+  background: #F0F0EC;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+.prose-brief pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.83rem;
+  line-height: 1.55;
+  background: #F0F0EC;
+  border: 1px solid #E5E5E2;
+  padding: 14px 16px;
+  border-radius: 3px;
+  overflow-x: auto;
+  margin: 1.2em 0;
+  white-space: pre;
+}
+.prose-brief pre code {
+  background: transparent;
+  padding: 0;
+  font-size: inherit;
+}
+.prose-brief hr {
+  border: none;
+  border-top: 1px solid #E5E5E2;
+  margin: 2.4rem 0;
+}
+.prose-brief table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  font-size: 0.95em;
+}
+.prose-brief th, .prose-brief td {
+  border-bottom: 1px solid #E5E5E2;
+  padding: 0.5em 0.6em;
+  text-align: left;
+}
+.prose-brief th { font-weight: 600; }
+
+/* Subtle anchor link icon revealed on hover */
+.section-anchor-link {
+  opacity: 0;
+  transition: opacity 120ms ease;
+}
+.section-anchor-heading:hover .section-anchor-link,
+.section-anchor-heading:focus-within .section-anchor-link {
+  opacity: 0.55;
+}
+
+/* Smooth scroll for in-page nav */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
